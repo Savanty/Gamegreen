@@ -1,177 +1,749 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!
+ html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Marcou 5 Ganhou</title>
-<link rel="shortcut icon" type="image/jpg" href="https://raw.githubusercontent.com/SuaSortehoje/Pixplay/refs/heads/main/dinheiroFacil.jpg">
-<link rel="icon" href="https://raw.githubusercontent.com/SuaSortehoje/Pixplay/refs/heads/main/dinheiroFacil.jpg" type="image/jpg">
-<style>
-/* Aqui entra todo o CSS que você já tinha */
-body { font-family: Arial, sans-serif; background: url('https://picsum.photos/1600/900?random=1'); background-size: cover; min-height: 100vh; background-position: center; }
-.fundoCimar { background: purple; transition: background-color 0.5s; color:white; border-radius:30px 30px 0px 0px; }
-h1 { display:flex; justify-content:center; font-size:15px; }
-p { font-size:14px; text-align:center; color:gold; font-weight:bold; }
-.btn { margin:2px; padding:10px 20px; border:1px solid #ccc; border-radius:5px; cursor:pointer; }
-.btn.selected { background-color:black; color:white; }
-.btn.blocked { background-color:red; color:white; font-weight:bold; }
-.btn.vender { background-color:green; }
-.btn.green { background-color:green; color:white; }
-#numeros { display:grid; grid-template-columns: repeat(5, 1fr); gap:1px; max-width:350px; margin:0 auto; }
-#numerosBloqueadosContainer { display:none; grid-template-columns: repeat(5,1fr); gap:1px; max-width:350px; margin:20px; }
-.codig { display:inline; text-align:center; width:40%; margin-top:0px; margin-bottom:10px; border-radius:10px; }
-#verificar { display:inline; width:70%; margin-left:10px; margin-top:12px; background:skyblue; color:black; border-radius:10px; font-weight:bold; }
-.blink { font-weight:bold; margin:5px; animation: blink 1s steps(1,end) infinite; }
-@keyframes blink { 0%{opacity:1;} 2%{color:green;} 4%{color:gold;} 6%{color:lime;} 50%{opacity:0;} 51%{color:gold;} 56%{color:lime;} 80%{opacity:1;} 85%{color:gold;} 86%{color:lime;} }
-.pagar { color:white; font-size:18px; }
-.regra { text-decoration:none; color:blue; border-radius:10px; text-align:center; }
-.regraDiv { text-align:center; }
-.credito { margin-left:5px; margin-top:12px; background:green; color:white; border-radius:10px; font-weight:bold; }
-.valorSacar { width:80px; margin-left:260px; border-radius:10px; text-align:center; font-weight:bold; background:grey; outline:none; }
-.disponivel { text-align:right; font-size:12px; font-weight:bold; }
-.sacar { background:grey; color:black; font-weight:bold; border-radius:10px; margin-left:5px; }
-.centra { text-align:center; }
-.btns { display:inline; text-align:center; width:60%; }
-.slideshow { position:absolute; width:70%; height:30px; overflow:hidden; border:1px solid red; }
-.slideshow img { position:absolute; top:0; left:0; width:100%; height:30px; animation: fade 20s infinite; }
-@keyframes fade { 10%{opacity:1;} 50%{opacity:0;} 100%{opacity:0;} }
-.modal { display:none; position:fixed; z-index:1000; padding-top:80px; left:0; top:0; width:100%; height:100%; background-color: rgba(0,0,0,0.7); }
-.modal-content { background-color:#222; margin:auto; padding:20px; border-radius:10px; width:90%; max-width:400px; color:white; text-align:center; }
-.closeBtn { color:#aaa; float:right; font-size:28px; font-weight:bold; cursor:pointer; }
-.closeBtn:hover { color:white; }
-</style>
+    <link rel="shortcut icon" type="image/jpg" href="https://raw.githubusercontent.com/SuaSortehoje/Pixplay/refs/heads/main/dinheiroFacil.jpg">
+    <link rel="icon" href="https://raw.githubusercontent.com/SuaSortehoje/Pixplay/refs/heads/main/dinheiroFacil.jpg" type="image/jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen" />
+    
+    <title>Marcou 5 Ganhou</title>
+    <style> 
+    .fundoCimar {
+    background:purple;
+    transition: background-color 0.5s;
+ color:white;
+    border-radius:30px 30px 0px 0px;
+}
+        body {
+            
+        background: url('https://picsum.photos/1600/900?random=1');
+            background-size:cover;
+            background:min-height:100vh;
+            background-position:center;    
+            }
+            
+        h1 {
+            display: flex;
+            justify-content: center;
+            flex-direction:rows;
+            font-size: 15px;
+        }
+
+        p {
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .btn {
+            margin: 1px;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            box-sizing: border-box;
+            margin:2px;
+        }
+
+        .btn.selected {
+            background-color: black;
+            color: white;
+        }
+
+        .btn.blocked {
+            background-color: red;
+            color: white;
+            font-weight: bold;
+        }
+
+        .btn.vender {
+            background-color: gree;
+        }
+
+        .btn.green {
+            background-color: green;
+            color: white;
+        }
+
+        #numeros {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1px;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+
+        #numerosBloqueadosContainer {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1px;
+            max-width: 350px;
+            margin: 20px;
+            display: none; /* Inicialmente escondido */
+        }
+
+        .codig {
+            display: inline;
+            justify-content: center;
+            flex-direction:rows;
+            text-align: center;
+            width:40%;
+            margin-top: 0px;
+            margin-bottom:10px;
+            border-radius:10px;
+        }
+
+        #verificar {
+            display: inline;
+            width:70%;
+            justify-content: center;
+            flex-direction:rows;
+            margin-left: 10px;
+            margin-top: 12px;
+            background: skyblue;
+            color: black;
+            border-radius:10px;
+            font-weight:bold
+        }
+        .blink {
+            font-weight:bold;
+            margin:5px;
+        }
+.blink { animation: blink 1s steps(1, end) infinite; } @keyframes blink { 
+0% { opacity: 1; } 
+2% {color:green;}
+4% {color: gold;}
+5% {color: gold;}
+6% { color:lime;}
+50% { opacity: 0; } 
+51% {color: gold;}
+56% { color:lime;}
+80% { opacity: 1; }
+85% {color: gold;}
+86% { color:lime;}
+ }
+ 
+ 
+ .pagar{
+     color:white;
+     font-size:18px;
+     
+     
+ }
+ .regra {
+     text-decoration:none;
+     color:blue;
+     border-radius:10px;
+     text-align:center;
+     
+ }
+ span {
+     
+ }
+  .regraDiv {
+     text-align:center;
+     }
+     
+     .credito{
+         margin-left:5px;
+         margin-top: 12px;
+            background: green;
+            color: white;
+            border-radius:10px;
+            font-weight:bold      
+     }
+     .valorSacar{
+         width:80px;
+         margin-left:260px;
+         border-radius:10px;
+         text-align:center;
+         font-weight:bold;
+         background:grey;
+         outline:none;
+         text-decoration:none;
+         color:
+     }
+     .disponivel{
+         text-align: right;
+         font-size:12px;
+         
+         font-weight:bold;
+     }
+     .sacar {
+         background:grey;
+         color:Black;
+         font-weight:bold;
+         border-radius:10px;
+         margin-left:5px;
+     }
+     .pre {
+         margin:0;
+         text-align: right;
+     }
+     .din {
+         text-align: right;
+     }
+     .centra {
+          text-align:center;
+     }
+     .inputnormal {
+         
+         display: block-inline;
+            justify-content:center;
+            
+          text-align:center;
+     }
+     .btns {
+         display:inline;
+          text-align:center;
+          width:60%;
+     }
+     
+     .mgiDivulgacao{
+         width:100%;
+         height:20px;
+         border:1px solid red;
+         
+     }
+     .imgDiv {
+        
+     }
+     .propagada {
+         color:white;
+         font-size:10px;
+         border-radius:1px;
+         border:1px solid white;
+         margin:1px;
+         margin-bottom:2px;
+     }
+     .slideshow {
+          position:absolute;
+        width:70%;
+        background-image: url(https://raw.githubusercontent.com/SuaSortehoje/marcou_ganhou/refs/heads/main/ladoT.jpg);
+        
+      height: 30px; overflow: hidden;border:1px solid red; } 
+
+.slideshow img { position: absolute; top: 0; left: 0; background-image: url(https://raw.githubusercontent.com/SuaSortehoje/marcou_ganhou/refs/heads/main/pagSeguro.jpg); width: 100%; height:30px; animation: fade 20s infinite; } 
+
+.slideshow a { text-decoration: none; padding: 0; margin: 0; }
+
+ @keyframes fade { 
+  10%  { opacity: 1; } 
+    50%  { opacity: 0; } 
+      100%  { opacity: 0; } 
+  } 
+  .imgCadeado {
+      width:30%;
+      height:35px;
+      margin-left:3px;
+      scale: 0.1, 2,1;
+  }
+.protecao{
+    justify-content:center;
+    text-align:center;
+    margin:2px;
+    display:inline;
+    width:30%;
+    height:30px;
+}
+.imgSatifation {
+    width:90%;
+    margin-left:5px;
+      height:30px;
+}.contaNumero{
+    color:white;
+}
+
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Estilos do modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    background:black;
+    left: 0;
+    top: 20%;
+    width: 100%; 
+    background-color: rgba(0, 0, 0, 0.0);
+}
+
+/* Conteúdo do modal */
+.modal-content {
+    background-color: black;
+    background-color: rgba(0, 0, 0, 0.8);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 300px;
+    text-align: center;
+}
+
+/* Botão de fechar (X) */
+.closeBtn {
+    color: #ffffff;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.closeBtn:hover,
+.closeBtn:focus {
+    color: #000;
+    cursor: pointer;
+}
+p{
+    color:gold;
+    font-weight:bold;
+}
+#total{
+    color:gold;
+    margin-left:45px;
+}
+.grupamento{
+    background:purple;
+    border-radius:0px 0px 30px 30px;
+}
+@keyframes scroll-left {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+} 
+          .numeros {
+    height: 35px;
+    font-size: 13px;
+  }
+
+
+/* Telas menores que 360px */
+@media (max-width: 360px) {
+  #numeros {
+    grid-template-columns: repeat(auto-fit, minmax(32px, 1fr));
+    gap: 3px;
+  }
+  .numeros {
+    height: 32px;
+    font-size: 12px;
+  }
+}
+    </style>
+      <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<script type="module" src="script.js"></script>
-<!-- Modal QR Pix -->
-<div id="alertModal" class="modal">
-    <div class="modal-content">
-        <span class="closeBtn">&times;</span>
-        <p>CODIGO DE ACESSO, SERA GERADO E LIBERADO APÓS O PAGAMENTO DE FORMA AUTOMÁTICA!</p>
-        <h3>Pagamento via Pix</h3>
-        <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=00020126360014br.gov.bcb.pix0114+557199229005852040000530398654042.005802BR5922Carlos%20Dos%20Santos%20Reis6009Sao%20Paulo610901227-20062230519daqr26564427370426763043E96" alt="QR Code Pix">
-        <p>Copie o código Pix abaixo:</p>
-        <textarea readonly>00020126360014br.gov.bcb.pix0114+557199229005852040000530398654042.005802BR5922Carlos Dos Santos Reis6009Sao Paulo610901227-20062230519daqr26564427370426763043E96</textarea>
+    <div class="fundoCimar">
+    <div id="alertModal" class="modal">
+        <div class="modal-content">
+            <span class="closeBtn">&times;</span>
+            <p>CODIGO DE ACESSO, SERA GERADO E LIBERADO APÓS O PAGAMENTO DE FORMAR AUTOMÁTICA!</p>
+            <!-- Botão para redirecionar -->
+             <a href='/comprarcreditoautomatico'><button class="credito">COMPRAR CODIGO</button></a>
+             
+             </div> 
+        </div>
+
+    
+
+    
+    
+    
+    <h1>MARQUE E GANHE NA HORA R$ 200.00</h1>
+
+<div>
+<div class="content">
+  <div class="valores"> </div> <span id="total"></span>
+
+ 
     </div>
+    
+</div>
+<label class="propagada">propaganda </label>
+
+
+<div class="slideshow"> <a href="https://wa.me/5571993010261"> <img src="https://raw.githubusercontent.com/SuaSortehoje/marcou_ganhou/refs/heads/main/pagSeguro.jpg" alt="ladoT"></a> 
+
+<a href="https://wa.me/5571999259612"> <img src="https://raw.githubusercontent.com/Savanty/AE/refs/heads/main/imgEdite.jpg" alt="melhorGesso"></a> 
 </div>
 
-<div class="fundoCimar">
-    <h1>MARQUE E GANHE NA HORA R$ 100.00</h1>
 
-    <div class="inputnormal">
-        <input class="codig" type="number" id="codigo" placeholder="Digite Código Acesso">
-        <button id="refreshBtn" class="credito">COMPRAR CODIGO</button>
-    </div>
-
+<div class="pre">
+ <label class="disponivel">Pre Disponivel</label></div> <div class="din"><input class="valorSacar"type="text"value=" R$ 200.00" disabled></div><br>
+ <div class="centra">
+   <span class="jafa"> Marque </span> <span style="color:gold;font-weight:bold">15</span> números dos <span style="color:gold;font-weight:bold"> 50</span> <br>Acertando  <span style="color:gold;font-weight:bold;">O5 </span>dos Sorteio, PIX imediato de  <span style="color:lime;font-weight:bold"> R$ 200,00</span></div>
+    
+ 
+ <div class="inputnormal"> <input class="codig" type="number" id="codigo" placeholder="Digite Código Acesso">
+ 
+ <button id="refreshBtn" class="credito">COMPRAR CODIGO</button>
+  </div>
+ </div>
     <div id="numeros"></div>
     <div class="grupamento">
-        <div class="btns">
-            <button id="verificar" onclick="verificar()" disabled>VER RESULTADO</button>
-            <button class="sacar" onclick="gerar()" disabled>SACAR</button>
-        </div>
-        <p id="mensagem"></p>
-        <div id="numerosBloqueadosContainer"></div>
-        <p class="contaNumero" id="contadorNumeros">Números selecionados: 0/15</p>
-        <button id="enviar" style="display:none;margin-left:30%" onclick="enviarViaWhatsApp()">RECEBER O PREMIO</button>
-    </div>
+   <div class="btns"> <button id="verificar" onclick="verificar()" disabled>VER RESULTADO</button>  
+    
+ 
+    
+     <button class="sacar" onclick="gerar()" disabled>SACAR</button></a>
+     </div>
+     
+    <p id="mensagem"></p>
+    <div id="numerosBloqueadosContainer"></div> <!-- Container para os números bloqueados -->
+    <p class="contaNumero" id="contadorNumeros">Números selecionados: 0/15</p>
+
+    <p id="temporizador"></p>
+    <button id="enviar" style="display:none;margin-left:30%" onclick="enviarViaWhatsApp()">RECEBER O PREMIO</button>
+    
+       <div class="protecao">
+       <img class="imgCadeado" src="https://raw.githubusercontent.com/Savanty/Gamegreen/refs/heads/main/cadeado.svg">  <img src="https://raw.githubusercontent.com/Savanty/Gamegreen/refs/heads/main/seguro-1-1.png" class="imgCadeado"><img class="imgCadeado" src="https://raw.githubusercontent.com/Savanty/Gamegreen/refs/heads/main/imagesPega.png">
+       <img class="imgSatifation" src="satisfation.webp">
+       </div>
+       </div>
+       
+  <marquee class="blink">ACUMULOU<span class="pagar"> R$ 2.00 </span>GANHA <span class="pagar">R$ 200.00, A SORTE E SUA <span class="blink">A GARANTIA E NOSSA</span></marquee>
+ 
+   <br>
+   <div class="regraDiv">
+   <a class='regra' href='/regra'>como jogar </div></a>
+    <div id="alertModal" class="modal">
+  <div class="modal-content">
+    <span class="closeBtn">&times;</span>
+    <p>CÓDIGO DE ACESSO SERÁ GERADO E LIBERADO APÓS O PAGAMENTO!</p>
+    <button class="credito" id="abrirCompraModal">COMPRAR CÓDIGO</button>
+  </div>
 </div>
 
-<!-- WhatsApp fixo -->
-<a href="https://wa.me/5571992290058" style="position:fixed;width:35px;height:35px;bottom:20px;right:20px;color:#25d366;border-radius:50px;text-align:center;font-size:30px;z-index:1000;">
-<i style="margin-top:16px" class="fa fa-whatsapp"></i></a>
+<!-- Modal 2: compra -->
+<div id="compraModal" class="modal">
+  <div class="modal-content">
+    <span class="closeCompraBtn">&times;</span>
+    <h2>Gerar Código de Acesso</h2>
+    <input type="text" id="nomeCliente" placeholder="Seu nome" required>
+    <input type="number" id="quantidade" min="1" value="1" required>
+    <input type="text" id="valorTotal" placeholder="Valor a pagar" disabled>
 
-<!-- Scripts do jogo e Firebase -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-database.js";
+    <p><strong>Chave Pix:</strong></p>
+    <div class="pix-box">
+      <span id="chavePix">71992290058</span>
+      <button id="copiarPix">Copiar</button>
+    </div>
 
-// Config Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyBPCb84OTJTcW1WDrZ41RNmXddlGhDgeI0",
-  authDomain: "gamewin-aa8b2.firebaseapp.com",
-  databaseURL: "https://gamewin-aa8b2-default-rtdb.firebaseio.com",
-  projectId: "gamewin-aa8b2",
-  storageBucket: "gamewin-aa8b2.firebasestorage.app",
-  messagingSenderId: "378162274661",
-  appId: "1:378162274661:web:f5188bee8090f0d4a0818c"
-};
+    <button id="gerarCodigoBtn" class="credito">Gerar Código</button>
+  </div>
+</div>
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const pagamentoRef = ref(db, 'pagamentos/12345'); // Nó do pagamento
+        
+    <script>
+            // Obtém o modal e o botão de fechar
+var modal = document.getElementById("alertModal");
+var closeBtn = document.getElementsByClassName("closeBtn")[0];
+var refreshBtn = document.getElementById("refreshBtn"); 
 
-// Botões e contadores
-const numerosContainer = document.getElementById("numeros");
-const verificarBtn = document.getElementById("verificar");
-const enviarBtn = document.getElementById("enviar");
-const refreshBtn = document.getElementById("refreshBtn");
-const contadorNumeros = document.getElementById("contadorNumeros");
-
-let selecionados = [];
-const MAX_SELECIONADOS = 15;
-
-// Cria 50 botões de números
-for (let i = 1; i <= 50; i++) {
-  const btn = document.createElement("button");
-  btn.id = `num${i}`;
-  btn.innerText = i;
-  btn.classList.add("btn");
-  btn.disabled = true; // inicialmente bloqueado
-  btn.addEventListener("click", () => selecionarNumero(btn, i));
-  numerosContainer.appendChild(btn);
+// Função para abrir o modal
+function openModal() {
+    modal.style.display = "block";
 }
 
-// Função de seleção de número
-function selecionarNumero(btn, numero) {
-  if (selecionados.includes(numero)) {
-    selecionados = selecionados.filter(n => n !== numero);
-    btn.classList.remove("selected");
-  } else {
-    if (selecionados.length < MAX_SELECIONADOS) {
-      selecionados.push(numero);
-      btn.classList.add("selected");
+// Função para fechar o modal
+function closeModal() {
+    modal.style.display = "none";
+}
+
+// Fechar modal ao clicar no botão de fechar
+closeBtn.onclick = function() {
+    closeModal();
+}
+
+// Fechar modal ao clicar fora dele
+window.onclick = function(event) {
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+
+// Exibe o modal automaticamente ao carregar a página
+window.onload = function() {
+    openModal();
+}
+refreshBtn.onclick = function() { location.reload(); }
+ 
+        let numerosBloqueados = [];
+        let codigos = [14081980, 195668863, 653096775, 129458784, 647644585, 443128755, 978833854, 699939985, 767384775, 560098454, 647720985, 878867472, 441379895, 987877854, 691997689, 811977998, 108488515, 313503398, 806521291, 366222274, 716412153, 592315254, 846882055, 504350967, 673207856, 209122885, 487021874, 337834017, 596597699, 387881987, 309821965, 317663273, 507683477, 929766404, 446224552, 394128835, 887963495, 960901270, 491987744, 249212270, 956535448, 003496557, 840776998, 217612049, 739668764, 466345912, 189763211, 112967891, 904432227, 595665575, 109613223, 899876852, 755228448, 960976264, 216594314, 919098432, 284337447, 101697666, 702397611, 229654597, 874016500, 621216610, 336090028, 485980154, 635598519, 286682713, 732880862, 195658863, 653677587, 129458884, 986476585, 443438755, 978638854, 699975985, 767388775, 005600454, 647728865, 878863674, 441365795, 965878854, 691539989, 811999998, 108784815, 313505598, 806528891, 366228474, 716094153, 592329854, 846668855, 504376967, 673275056, 209651885, 487029814, 337808817, 596587999, 367871987, 309878265, 317746673, 507846877, 999297604, 446224299, 394127635, 812879695, 960907900, 491988844, 249227980, 956544658, 349657657, 840757998, 217686049, 739656664, 465396612, 189768711, 112988691, 966044327, 595658875, 109617523, 899800852, 755223288, 960909264, 217565914, 919970432, 284338877, 101696966, 702396411, 229654597, 874019900, 621211660, 336075928, 485986854, 635551900, 286671413, 732888662]; // Lista de códigos válidos
+        let codigoUsado = [];
+        let numerosSelecionados = [];
+
+        iniciar();
+
+        function iniciar() {
+            carregarCodigoUsado();
+            trocarNumerosBloqueados();
+            criarBotoes();
+            setInterval(trocarNumerosBloqueados, 60000); // Troca os números bloqueados a cada 1 minuto
+        }
+
+        function trocarNumerosBloqueados() {
+            numerosBloqueados = [];
+            while (numerosBloqueados.length < 5) {
+                let num = Math.floor(Math.random() * 50) + 1;
+                if (numerosBloqueados.indexOf(num) === -1) numerosBloqueados.push(num);
+            }
+        }
+
+        function atualizarNumerosBloqueados() {
+            const container = document.getElementById("numerosBloqueadosContainer");
+            container.innerHTML = ''; // Limpar o container antes de adicionar os botões
+            numerosBloqueados.forEach(num => {
+                let btn = document.createElement("button");
+                btn.classList.add("btn", "blocked");
+                btn.innerText = num;
+                if (numerosSelecionados.includes(num)) {
+                    btn.classList.add("green"); // Mudar para verde se o número for selecionado
+                }
+                container.appendChild(btn);
+            });
+        }
+
+        function criarBotoes() {
+            const container = document.getElementById("numeros");
+            container.innerHTML = ''; // Limpar o container antes de criar os botões
+            for (let i = 1; i <= 50; i++) {
+                let btn = document.createElement("button");
+                btn.classList.add("btn");
+                btn.innerText = i;
+                btn.id = `num${i}`;
+                btn.onclick = () => selecionarNumero(i);
+                btn.disabled = true; // Inicialmente desabilitado
+                container.appendChild(btn);
+            }
+        }
+
+        function selecionarNumero(num) {
+            let idx = numerosSelecionados.indexOf(num);
+
+            if (idx === -1 && numerosSelecionados.length < 15) {
+                numerosSelecionados.push(num);
+                document.getElementById(`num${num}`).classList.add("selected");
+
+                if (numerosBloqueados.includes(num)) {
+                    document.getElementById(`num${num}`).classList.add("vender");
+                }
+            }
+
+            atualizarContador();
+            verificarBotaoVerificar();
+            atualizarNumerosBloqueados(); // Atualizar a cor dos números bloqueados
+        }
+
+        function atualizarContador() {
+            document.getElementById("contadorNumeros").innerText = `Números selecionados: ${numerosSelecionados.length}/15`;
+        }
+
+        function verificarBotaoVerificar() {
+            document.getElementById("verificar").disabled = numerosSelecionados.length !== 15;
+        }
+
+        function verificar() {
+    let codigoDigitado = parseInt(document.getElementById("codigo").value);
+    let acertos = numerosSelecionados.filter(n => numerosBloqueados.includes(n)).length;
+    let msg = "";
+
+    if (codigos.includes(codigoDigitado) && !codigoUsado.includes(codigoDigitado)) {
+        codigoUsado.push(codigoDigitado);
+        salvarCodigoUsado();
+
+        atualizarNumerosBloqueados();
+        document.getElementById("numerosBloqueadosContainer").style.display = "grid";
+
+        if (acertos === 5) {
+            msg = "Parabéns, você ganhou!";
+            document.getElementById("enviar").style.display = "block"; // Mostrar botão "Enviar"
+        } else {
+            msg = "Tente novamente.";
+            document.getElementById("enviar").style.display = "none";
+        }
+
+        document.getElementById("mensagem").innerText = msg;
+
+        // Adiciona um temporizador para esconder os números bloqueados após 10 segundos
+        setTimeout(() => {
+            document.getElementById("numerosBloqueadosContainer").style.display = "none";
+            location.reload(); // Recarregar a página após os números sumirem
+        }, 15000); // 15000 milissegundos = 10 segundos
+    } else if (codigoUsado.includes(codigoDigitado)) {
+        document.getElementById("mensagem").innerText = "Este código já foi usado. Tente outro.";
     } else {
-      alert("Você já selecionou 15 números!");
+        document.getElementById("mensagem").innerText = "Código inválido.";
     }
-  }
-  contadorNumeros.innerText = `Números selecionados: ${selecionados.length}/${MAX_SELECIONADOS}`;
 }
 
-// Verificação fictícia de resultado
-function verificar() {
-  const ganhadores = [3, 7, 12, 20, 25, 30, 33, 38, 44, 49]; // exemplo
-  const acertados = selecionados.filter(n => ganhadores.includes(n));
-  alert(`Você acertou ${acertados.length} números!`);
-  if (acertados.length >= 5) {
-    enviarBtn.style.display = "block";
-  }
-}
-
-// Envio via WhatsApp
-function enviarViaWhatsApp() {
-  const numerosStr = selecionados.join(", ");
-  const mensagem = `Meus números: ${numerosStr}\nQuero receber o prêmio!`;
-  window.open(`https://wa.me/5571992290058?text=${encodeURIComponent(mensagem)}`, "_blank");
-}
-
-// Monitoramento do Firebase
-onValue(pagamentoRef, (snapshot) => {
-  const status = snapshot.val();
-  if (status === "confirmado") {
-    // Libera todos os botões
+function limparCampos() {
+    document.getElementById("codigo").value = '';
+    numerosSelecionados = [];
+    atualizarContador();
+    verificarBotaoVerificar();
     for (let i = 1; i <= 50; i++) {
-      document.getElementById(`num${i}`).disabled = false;
+        document.getElementById(`num${i}`).classList.remove("selected", "vender");
     }
-    verificarBtn.disabled = false;
-    refreshBtn.disabled = false;
-    alert("Pagamento confirmado! Você pode jogar agora.");
-  }
-});
+    liberarBotoes(false); // Bloquear botões após a verificação
+}
 
-// Modal Pix
-const modal = document.getElementById("alertModal");
-const closeBtn = document.querySelector(".closeBtn");
-refreshBtn.addEventListener("click", () => modal.style.display = "block");
-closeBtn.addEventListener("click", () => modal.style.display = "none");
-window.addEventListener("click", (e) => { if (e.target == modal) modal.style.display = "none"; });
-</script>
+function liberarBotoes(habilitar) {
+    for (let i = 1; i <= 50; i++) {
+        document.getElementById(`num${i}`).disabled = !habilitar;
+    }
+}
+
+function liberarBotoesAposCodigo() {
+    let codigoDigitado = parseInt(document.getElementById("codigo").value);
+    if (codigos.includes(codigoDigitado) && !codigoUsado.includes(codigoDigitado)) {
+        liberarBotoes(true); // Habilitar os botões para selecionar números
+        limparCampos(); // Limpar os campos e números selecionados ao digitar um novo código
+    } else {
+        liberarBotoes(false); // Manter os botões desabilitados
+    }
+}
+
+// Adicionando o evento de input no campo de código
+document.getElementById("codigo").addEventListener("input", liberarBotoesAposCodigo);
+
+// Modifique a função verificar para desabilitar os botões após a verificação
+function verificar() {
+    let codigoDigitado = parseInt(document.getElementById("codigo").value);
+    let acertos = numerosSelecionados.filter(n => numerosBloqueados.includes(n)).length;
+    let msg = "";
+
+    if (codigos.includes(codigoDigitado) && !codigoUsado.includes(codigoDigitado)) {
+        codigoUsado.push(codigoDigitado);
+        salvarCodigoUsado();
+
+        atualizarNumerosBloqueados();
+        document.getElementById("numerosBloqueadosContainer").style.display = "grid";
+
+        if (acertos === 5) {
+            msg = "Parabéns, você ganhou!";
+            document.getElementById("enviar").style.display = "block"; // Mostrar botão "Enviar"
+        } else {
+            msg = "Tente novamente.";
+            document.getElementById("enviar").style.display = "none";
+        }
+
+        document.getElementById("mensagem").innerText = msg;
+
+        // Desabilitar os botões após a verificação
+        liberarBotoes(false);
+
+        // Adiciona um temporizador para esconder os números bloqueados após 10 segundos
+        setTimeout(() => {
+            document.getElementById("numerosBloqueadosContainer").style.display = "none";
+            location.reload(); // Recarregar a página após os números sumirem
+        }, 15000); // 10000 milissegundos = 10 segundos
+    } else if (codigoUsado.includes(codigoDigitado)) {
+        document.getElementById("mensagem").innerText = "Este código já foi usado. Tente outro.";
+    } else {
+        document.getElementById("mensagem").innerText = "Código inválido.";
+    }
+}
+function liberarBotoesAposCodigo() {
+    let codigoDigitado = parseInt(document.getElementById("codigo").value);
+    if (codigos.includes(codigoDigitado) && !codigoUsado.includes(codigoDigitado)) {
+        liberarBotoes(true); // Habilitar os botões para selecionar números
+        limparCampos(); // Limpar os campos e números selecionados ao digitar um novo código
+    } else {
+        liberarBotoes(false); // Manter os botões desabilitados
+    }
+}
+
+// Adicionando o evento de input no campo de código
+document.getElementById("codigo").addEventListener("input", liberarBotoesAposCodigo);
+
+        function carregarCodigoUsado() {
+            let dados = localStorage.getItem("codigoUsado");
+            if (dados) {
+                codigoUsado = JSON.parse(dados);
+            }
+        }
+
+        function salvarCodigoUsado() {
+            localStorage.setItem("codigoUsado", JSON.stringify(codigoUsado));
+        }
+
+        function gerarCodigo() {
+    return Math.floor(100000 + Math.random() * 900000); // Gera um código de 6 dígitos
+}
+
+function enviarViaWhatsApp() {
+    let numeroBloqueadosTexto = `Números Bloqueados: ${numerosBloqueados.join(", ")}`;
+    let numerosSelecionadosTexto = `Números Selecionados: ${numerosSelecionados.join(", ")}`;
+    
+    // Obter a data e hora atual
+    let dataAtual = new Date();
+    let dataTexto = `Data: ${dataAtual.toLocaleDateString()}`;
+    let horaTexto = `Hora: ${dataAtual.toLocaleTimeString()}`;
+
+    // Solicitar o número do PIX
+    let pix = prompt("Por favor, digite o número do PIX:");
+
+    // Verificar se o PIX foi digitado
+    if (pix) {
+        let codigo = gerarCodigo(); // Gera um código de 6 dígitos
+        // Criar a mensagem
+        let mensagem = `PIX: ${pix}\nCódigo: ${codigo}\n${numeroBloqueadosTexto}\n${numerosSelecionadosTexto}\n${dataTexto}\n${horaTexto}`;
+
+        // Criar a URL para enviar via WhatsApp
+        let url = "https://api.whatsapp.com/send?phone=5571992290058&text=" + encodeURIComponent(mensagem);
+        window.open(url, "_blank");
+    } else {
+        alert("O número do PIX é obrigatório.");
+    }
+}
+
+
+// Certifique-se de que a função enviarViaWhatsApp seja chamada ao clicar no botão "Enviar"
+document.getElementById("enviar").addEventListener("click", enviarViaWhatsApp);
+
+        function liberarBotoesAposCodigo() {
+            let codigoDigitado = parseInt(document.getElementById("codigo").value);
+            if (codigos.includes(codigoDigitado) && !codigoUsado.includes(codigoDigitado)) {
+                liberarBotoes(true); // Habilitar os botões para selecionar números
+            } else {
+                liberarBotoes(false); // Manter os botões desabilitados
+            }
+        }
+
+        document.getElementById("codigo").addEventListener("input", liberarBotoesAposCodigo);
+        
+        function gerar (){
+       alert("CODIGO de ACESSO GERADO COM SUCESSO  SERA LIBERADO APOS O PIX de FORMAR AUTOMATICA")
+    }
+             // Array de cores
+        var cores = ['#FF5733', '#3357FF', '#FF33A1', '#A133FF', '#000000', '#0014ed', '#fffa00'];
+
+        // Função para mudar a cor do background
+        function mudarCorBackground() {
+            // Selecionar uma cor aleatória do array
+            var corAleatoria = cores[Math.floor(Math.random() * cores.length)];
+            // Aplicar a cor ao background do body
+            document.fundoCima.style.backgroundColor = corAleatoria;
+        }
+
+        // Chamar a função a cada 30 minutos (30 minutos = 30 * 60 * 1000 milissegundos)
+        setInterval(mudarCorBackground, 0.3 * 6 * 1000);
+
+        // Mudar a cor imediatamente ao carregar a página
+        mudarCorBackground();
+        
+        
+        
+    </script>
+    
+</body>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<a href="https://wa.me/5571992290058?text=pagamento%20liberacao%20codigo%20de%20Acesso%0Achave%20pix:%20telefone%0A71992290058%0ACarlos Santos Reis%0Avalor%20por%20codigo%20R$%202.00%0AEnvia%20O%20Comprovante" style="position:fixed;width:35px;height:35px;bottom:20px;right:20px;color:#25d366;border-radius:50px;text-align:center;font-size:30px;
+  z-index:1000;" target="_blank">
+<i style="margin-top:16px" class="fa fa-whatsapp"></i></a>
+</html>
